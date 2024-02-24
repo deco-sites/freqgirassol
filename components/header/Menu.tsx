@@ -72,7 +72,7 @@ function MenuItem({ item }: { item: INavItem }) {
 
 function Menu({ items }: Props) {
   return (
-    <div class="flex flex-col h-full overflow-y-scroll">
+    <div class="flex flex-col h-full">
       <ul class="flex-grow flex flex-col divide-y divide-base-300">
         {items.map((item) => (
           <li>

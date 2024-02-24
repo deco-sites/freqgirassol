@@ -82,21 +82,9 @@ function Drawers({ menu, searchbar, children, platform }: Props) {
           }}
           title={displayMenu.value ? "Menu" : "Buscar"}
         >
-          {displayMenu.value
-            ? (
-              <>
-                <div class="block">
-                  <Menu {...menu} />
-                </div>
-              </>
-            )
-            : (
-              <>
-                <div class="hidden">
-                  <Menu {...menu} />
-                </div>
-              </>
-            )}
+          <div class={`${displayMenu.value ? "block" : "hidden"} overflow-y-scroll`}>
+            <Menu {...menu} />
+          </div>
           {searchbar && displaySearchDrawer.value && (
             <div class="w-screen">
               <Searchbar {...searchbar} />
