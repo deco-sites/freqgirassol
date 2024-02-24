@@ -54,3 +54,8 @@
     --dot-progress: 100%
   }
 }
+
+.containerNavItems:hover + .overlayNavItems {
+  height: 100vh;
+  opacity: .6;
+}

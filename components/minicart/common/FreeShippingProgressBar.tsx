@@ -26,7 +26,7 @@ function FreeShippingProgressBar({ target, total, currency, locale }: Props) {
           : <span>Você ganhou frete grátis!</span>}
       </div>
       <progress
-        class="progress progress-primary w-full"
+        class="progress progress-secondary w-full"
         value={percent}
         max={100}
       />
