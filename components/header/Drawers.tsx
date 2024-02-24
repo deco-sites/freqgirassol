@@ -31,12 +31,24 @@ const Aside = (
 ) => (
   <div class="bg-base-100 grid grid-rows-[auto_1fr] h-full divide-y max-w-[100vw]">
     <div class="flex justify-between items-center">
-      <h1 class="px-4 py-3">
-        <span class="font-medium text-2xl">{title}</span>
-      </h1>
+      {title == "Buscar" || title == "Menu"
+        ? (
+          <div class="px-4 pt-[24px] flex items-center">
+            <Icon id="MidSunflower" strokeWidth={1} class={`absolute w-8`} />
+            <span class="font-bold text-[32px] ml-[35px]">{title}</span>
+          </div>
+        )
+        : (
+          <>
+            <div class="px-[32px] py-[24px] flex items-center gap-2">
+              <Icon id="ShoppingCart" size={25} strokeWidth={1} />
+              <span class="font-bold text-[32px]">{title}</span>
+            </div>
+          </>
+        )}
       {onClose && (
         <Button class="btn btn-ghost" onClick={onClose}>
-          <Icon id="XMark" size={24} strokeWidth={2} />
+          <Icon id="XMark" size={24} strokeWidth={1} class="text-[#878787]" />
         </Button>
       )}
     </div>
@@ -56,39 +68,50 @@ function Drawers({ menu, searchbar, children, platform }: Props) {
   const { displayCart, displayMenu, displaySearchDrawer } = useUI();
 
   return (
-    <>
-      <Drawer // left drawer
-        open={displayMenu.value || displaySearchDrawer.value}
-        onClose={() => {
-          displayMenu.value = false;
-          displaySearchDrawer.value = false;
-        }}
-        aside={
-          <Aside
-            onClose={() => {
-              displayMenu.value = false;
-              displaySearchDrawer.value = false;
-            }}
-            title={displayMenu.value ? "Menu" : "Buscar"}
-          >
-            {displayMenu.value && <Menu {...menu} />}
-            {searchbar && displaySearchDrawer.value && (
-              <div class="w-screen">
-                <Searchbar {...searchbar} />
-              </div>
+    <Drawer // left drawer
+      open={displayMenu.value || displaySearchDrawer.value}
+      onClose={() => {
+        displayMenu.value = false;
+        displaySearchDrawer.value = false;
+      }}
+      aside={
+        <Aside
+          onClose={() => {
+            displayMenu.value = false;
+            displaySearchDrawer.value = false;
+          }}
+          title={displayMenu.value ? "Menu" : "Buscar"}
+        >
+          {displayMenu.value
+            ? (
+              <>
+                <div class="block">
+                  <Menu {...menu} />
+                </div>
+              </>
+            )
+            : (
+              <>
+                <div class="hidden">
+                  <Menu {...menu} />
+                </div>
+              </>
             )}
-          </Aside>
-        }
-      >
-        {children}
-      </Drawer>
+          {searchbar && displaySearchDrawer.value && (
+            <div class="w-screen">
+              <Searchbar {...searchbar} />
+            </div>
+          )}
+        </Aside>
+      }
+    >
       <Drawer // right drawer
         class="drawer-end"
         open={displayCart.value !== false}
         onClose={() => displayCart.value = false}
         aside={
           <Aside
-            title="Minha sacola"
+            title="Minha Sacola"
             onClose={() => displayCart.value = false}
           >
             <Cart platform={platform} />
@@ -97,7 +120,7 @@ function Drawers({ menu, searchbar, children, platform }: Props) {
       >
         {children}
       </Drawer>
-    </>
+    </Drawer>
   );
 }
 

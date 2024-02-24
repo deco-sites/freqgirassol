@@ -1,35 +1,79 @@
 import Icon from "$store/components/ui/Icon.tsx";
 import type { SiteNavigationElement } from "apps/commerce/types.ts";
-
+import type { Props as ICard } from "$store/components/ui/Card.tsx";
+interface itemsNav {
+  label: string;
+  href: string;
+  destaque?: true | false;
+}
+interface itemNav {
+  label: string;
+  href?: string;
+  destaque?: true | false;
+  fontBold?: true | false;
+  children?: itemsNav[];
+}
+export interface INavItem {
+  label: string;
+  href?: string;
+  destaque?: true | false;
+  bold?: true | false;
+  children?: itemNav[];
+  firstCard?: ICard;
+  secondCard?: ICard;
+  opacityMenu?:
+    | "0.10"
+    | "0.20"
+    | "0.30"
+    | "0.40"
+    | "0.50"
+    | "0.60"
+    | "0.70"
+    | "0.80"
+    | "0.90"
+    | "1";
+}
 export interface Props {
-  items: SiteNavigationElement[];
+  items: INavItem[];
 }
 
-function MenuItem({ item }: { item: SiteNavigationElement }) {
+function MenuItem({ item }: { item: INavItem }) {
   return (
-    <div class="collapse collapse-plus">
-      <input type="checkbox" />
-      <div class="collapse-title">{item.name}</div>
-      <div class="collapse-content">
-        <ul>
-          <li>
-            <a class="underline text-sm" href={item.url}>Ver todos</a>
-          </li>
-          {item.children?.map((node) => (
-            <li>
-              <MenuItem item={node} />
-            </li>
-          ))}
-        </ul>
-      </div>
-    </div>
+    <>
+      {item.children?.length
+        ? (
+          <div class="collapse collapse-plus px-4">
+            <input type="checkbox" />
+            <div class="collapse-title">{item.label}</div>
+            <div class="collapse-content">
+              <ul>
+                <li>
+                  <a class="underline text-sm" href={item.href}>Ver todos</a>
+                </li>
+                {item.children?.map((node) => (
+                  <li>
+                    <MenuItem item={node} />
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        )
+        : (
+          <>
+            <div class="p-4">
+              <a class="p-4 text-base" href={item.href}>{item.label}</a>
+            </div>
+          </>
+        )}
+    </>
   );
 }
 
 function Menu({ items }: Props) {
   return (
-    <div class="flex flex-col h-full">
-      <ul class="px-4 flex-grow flex flex-col divide-y divide-base-200">
+    <div class="flex flex-col h-full overflow-y-scroll">
+      <ul class="flex-grow flex flex-col divide-y divide-base-300">
         {items.map((item) => (
           <li>
             <MenuItem item={item} />

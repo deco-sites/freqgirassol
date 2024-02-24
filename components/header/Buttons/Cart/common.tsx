@@ -11,8 +11,13 @@ interface Props {
   items: AnalyticsItem[];
 }
 
-function CartButton({ loading, currency, total, items }: Props) {
-  const { displayCart } = useUI();
+function CartButton({ loading, currency, total, items }: {
+  loading: boolean;
+  currency: string;
+  total: number;
+  items: AnalyticsItem[];
+}) {
+  const { displayCart, displayTop } = useUI();
   const totalItems = items.length;
 
   const onClick = () => {
@@ -26,9 +31,8 @@ function CartButton({ loading, currency, total, items }: Props) {
   return (
     <div class="indicator">
       <span
-        class={`indicator-item badge badge-secondary badge-sm ${
-          totalItems === 0 ? "hidden" : ""
-        }`}
+        class={`indicator-item badge badge-secondary badge-sm bg-primary h-[1.2rem] border-primary`}
+        style={{ transform: "translateY(-20%) translateX(30%)" }}
       >
         {totalItems > 9 ? "9+" : totalItems}
       </span>
@@ -40,7 +44,12 @@ function CartButton({ loading, currency, total, items }: Props) {
         loading={loading}
         onClick={onClick}
       >
-        <Icon id="ShoppingCart" size={24} strokeWidth={2} />
+        <Icon
+          id="ShoppingCart"
+          size={20}
+          strokeWidth={2}
+          class={`group-hover/hover:text-[#101820] -mt-[5px]`}
+        />
       </Button>
     </div>
   );

@@ -103,23 +103,14 @@ function Cart({
                     </span>
                   </div>
                 )}
-                <div class="w-full flex justify-between px-4 text-sm">
-                  <span>Subtotal</span>
-                  <span>
-                    {formatPrice(subtotal, currency, locale)}
-                  </span>
-                </div>
-                {onAddCoupon && (
-                  <Coupon onAddCoupon={onAddCoupon} coupon={coupon} />
-                )}
               </div>
 
               {/* Total */}
               <div class="border-t border-base-200 pt-4 flex flex-col justify-end items-end gap-2 mx-4">
                 <div class="flex justify-between items-center w-full">
-                  <span>Total</span>
+                  <span>Subtotal</span>
                   <span class="font-medium text-xl">
-                    {formatPrice(total, currency, locale)}
+                    {formatPrice(subtotal, currency, locale)}
                   </span>
                 </div>
                 <span class="text-sm text-base-300">
@@ -131,7 +122,7 @@ function Cart({
                 <a class="inline-block w-full" href={checkoutHref}>
                   <Button
                     data-deco="buy-button"
-                    class="btn-primary btn-block"
+                    class="btn-primary btn-block text-lg"
                     disabled={loading || isEmtpy}
                     onClick={() => {
                       sendEvent({
