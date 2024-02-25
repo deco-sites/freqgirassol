@@ -74,7 +74,8 @@ function Navbar({ items, searchbar, logoPreto, platform }: Props) {
               src={logoPreto.src}
               alt={logoPreto.alt}
               width={160}
-            />
+              height={75}
+              />
           </a>
         )}
 
@@ -100,6 +101,7 @@ function Navbar({ items, searchbar, logoPreto, platform }: Props) {
                   src={logoPreto.src}
                   alt={logoPreto.alt}
                   width={174}
+                  height={82}
                 />
               </a>
             )}

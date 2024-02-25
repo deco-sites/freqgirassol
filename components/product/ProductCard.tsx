@@ -276,7 +276,7 @@ function ProductCard({
                 {!l?.hide?.discount && (
                   <>
                   {listPrice && price && listPrice > price &&(
-                    <div class="absolute text-sm bg-primary top-[7px] right-[55px] lg:right-[75px] px-2 py-[1px]  rounded-full">
+                    <div class="absolute text-sm bg-primary top-[7px] right-0 lg:right-3 px-2 py-[1px]  rounded-full">
                       <span class="text-white font-bold">
                         {listPrice && price
                           ? `-${Math.round(((listPrice - price) / listPrice) * 100)}% `
