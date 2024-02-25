@@ -10,6 +10,7 @@ import type { Product } from "apps/commerce/types.ts";
 import { mapProductToAnalyticsItem } from "apps/commerce/utils/productToAnalyticsItem.ts";
 import Image from "apps/website/components/Image.tsx";
 import { relative } from "$store/sdk/url.ts";
+import Icon from "deco-sites/freqgirassol/components/ui/Icon.tsx";
 
 export interface Layout {
   basics?: {
@@ -56,8 +57,8 @@ interface Props {
   platform?: Platform;
 }
 
-const WIDTH = 200;
-const HEIGHT = 279;
+const WIDTH = 240;
+const HEIGHT = 240;
 
 function ProductCard({
   product,
@@ -67,9 +68,11 @@ function ProductCard({
   platform,
   index,
 }: Props) {
-  const { url, productID, name, image: images, offers, isVariantOf } = product;
+  const { url, productID, offers, isVariantOf } = product;
+  const name = isVariantOf?.name;
   const id = `product-card-${productID}`;
   const hasVariant = isVariantOf?.hasVariant ?? [];
+  const images = isVariantOf?.image;
   const productGroupID = isVariantOf?.productGroupID;
   const description = product.description || isVariantOf?.description;
   const [front, back] = images ?? [];
@@ -104,7 +107,7 @@ function ProductCard({
     <a
       href={url && relative(url)}
       aria-label="view product"
-      class="btn btn-block"
+      class="btn btn-primary btn-block min-h-10 h-10 text-lg rounded-lg"
     >
       {l?.basics?.ctaText || "Ver produto"}
     </a>
@@ -144,48 +147,6 @@ function ProductCard({
         class="relative overflow-hidden"
         style={{ aspectRatio: `${WIDTH} / ${HEIGHT}` }}
       >
-        {/* Wishlist button */}
-
-        <div
-          class={`absolute top-2 z-10 flex items-center
-            ${
-            l?.elementsPositions?.favoriteIcon === "Top left"
-              ? "left-2"
-              : "right-2"
-          }
-            
-          `}
-        >
-          <div
-            class={`${l?.hide?.favoriteIcon ? "hidden" : "block"} ${
-              l?.onMouseOver?.showFavoriteIcon ? "lg:group-hover:block" : ""
-            }`}
-          >
-            {platform === "vtex" && (
-              <WishlistButtonVtex
-                productGroupID={productGroupID}
-                productID={productID}
-              />
-            )}
-            {platform === "wake" && (
-              <WishlistButtonWake
-                productGroupID={productGroupID}
-                productID={productID}
-              />
-            )}
-          </div>
-          {/* Discount % */}
-          {!l?.hide?.discount && (
-            <div class="text-sm bg-base-100 p-[10px]">
-              <span class="text-base-content font-bold">
-                {listPrice && price
-                  ? `${Math.round(((listPrice - price) / listPrice) * 100)}% `
-                  : ""}
-              </span>
-              OFF
-            </div>
-          )}
-        </div>
 
         {/* Product Images */}
         <a
@@ -273,7 +234,7 @@ function ProductCard({
                 )
                 : (
                   <h2
-                    class="truncate text-base lg:text-lg text-base-content uppercase font-normal"
+                    class="truncate text-lg text-base-content font-normal"
                     dangerouslySetInnerHTML={{ __html: name ?? "" }}
                   />
                 )}
@@ -283,7 +244,7 @@ function ProductCard({
                 )
                 : (
                   <div
-                    class="truncate text-sm lg:text-sm text-neutral"
+                    class="truncate text-sm lg:text-sm text-black"
                     dangerouslySetInnerHTML={{ __html: description ?? "" }}
                   />
                 )}
@@ -303,14 +264,29 @@ function ProductCard({
                 } ${align === "center" ? "justify-center" : "justify-end"}`}
               >
                 <div
-                  class={`line-through text-base-300 text-xs font-light ${
+                  class={`line-through font-normal text-lg text-[#aeaeae] h-7 ${
                     l?.basics?.oldPriceSize === "Normal" ? "lg:text-sm" : ""
                   }`}
                 >
                   {formatPrice(listPrice, offers?.priceCurrency)}
                 </div>
-                <div class="text-base-content lg:text-sm font-light">
+                <div class="text-2xl font-medium text-primary-content relative">
                   {formatPrice(price, offers?.priceCurrency)}
+                {/* Discount % */}
+                {!l?.hide?.discount && (
+                  <>
+                  {listPrice && price && listPrice > price &&(
+                    <div class="absolute text-sm bg-primary top-[7px] right-[55px] lg:right-[75px] px-2 py-[1px]  rounded-full">
+                      <span class="text-white font-bold">
+                        {listPrice && price
+                          ? `-${Math.round(((listPrice - price) / listPrice) * 100)}% `
+                          : ""}
+                      </span>
+                    </div>
+                  )}
+                    
+                  </>
+                )}
                 </div>
               </div>
             </div>
@@ -350,11 +326,15 @@ function ProductCard({
         {!l?.hide?.cta
           ? (
             <div
-              class={`flex-auto flex items-end ${
+              class={`flex-col flex items-center justify-center gap-2 ${
                 l?.onMouseOver?.showCta ? "lg:hidden" : ""
               }`}
             >
               {cta}
+              <a href="#" class={`gap-2 border border-secondary w-full py-1 flex items-center justify-center rounded-lg text-secondary`}>
+                <Icon size={16} id="WhatsApp" strokeWidth={1} class={`text-secondary`}/>
+                WhatsApp
+              </a>
             </div>
           )
           : (
