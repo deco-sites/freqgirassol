@@ -68,21 +68,13 @@ function ProductShelf({
 
       <div
         id={id}
-        class={clx(
-          "grid",
-          layout?.showArrows && "grid-cols-[48px_1fr_48px]",
-          "px-0 md:px-5 container",
-        )}
+        class="lg:max-w-[1440px] grid grid-cols-[48px_1fr_48px] px-0 lg:px-[80px] lg:mx-auto"
       >
-        <Slider class="carousel carousel-center sm:carousel-end sm:gap-1 row-start-2 row-end-5">
+        <Slider class="carousel carousel-center py-1 lg:carousel-end gap-8 pl-4 pr-4 lg:pr-0 lg:pl-1 lg:gap-5 col-span-full row-start-2 row-end-5">
           {products?.map((product, index) => (
             <Slider.Item
               index={index}
-              class={clx(
-                "carousel-item",
-                slideDesktop[layout?.numberOfSliders?.desktop ?? 3],
-                slideMobile[layout?.numberOfSliders?.mobile ?? 1],
-              )}
+              class="shadow-card-product carousel-item w-[235px] lg:w-[23.2%] xl:w-[23.6%]"
             >
               <ProductCard
                 product={product}
@@ -97,17 +89,17 @@ function ProductShelf({
 
         {layout?.showArrows && (
           <>
-            <div class="relative block z-10 col-start-1 row-start-3">
-              <Slider.PrevButton class="absolute w-12 h-12 flex justify-center items-center">
-                <Icon size={24} id="ChevronLeft" strokeWidth={3} class="w-5" />
+            <div class="hidden relative lg:block z-10 col-start-1 row-start-3 lg:-left-8">
+              <Slider.PrevButton class="btn btn-circle hover:bg-primary hover:text-white absolute right-1/2">
+                <Icon size={24} id="ChevronLeft" strokeWidth={3} />
               </Slider.PrevButton>
             </div>
-            <div class="relative block z-10 col-start-3 row-start-3">
-              <Slider.NextButton class="absolute w-12 h-12 flex justify-center items-center">
+            <div class="hidden relative lg:block z-10 col-start-3 row-start-3 lg:-right-8">
+              <Slider.NextButton class="btn btn-circle hover:bg-primary hover:text-white absolute left-1/2">
                 <Icon size={24} id="ChevronRight" strokeWidth={3} />
               </Slider.NextButton>
             </div>
-          </>
+        </>
         )}
         <SliderJS rootId={id} />
         <SendEventOnView
