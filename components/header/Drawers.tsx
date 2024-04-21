@@ -35,14 +35,14 @@ const Aside = (
         ? (
           <div class="px-4 pt-[24px] flex items-center">
             <Icon id="MidSunflower" strokeWidth={1} class={`absolute w-8`} />
-            <span class="font-bold text-[32px] ml-[35px]">{title}</span>
+            <span class="font-bold text-2xl ml-[35px]">{title}</span>
           </div>
         )
         : (
           <>
-            <div class="px-[32px] py-[24px] flex items-center gap-2">
+            <div class="px-8 py-[24px] lg:py-3 flex items-center gap-2">
               <Icon id="ShoppingCart" size={25} strokeWidth={1} />
-              <span class="font-bold text-[32px]">{title}</span>
+              <span class="font-bold text-2xl ">{title}</span>
             </div>
           </>
         )}
@@ -82,7 +82,11 @@ function Drawers({ menu, searchbar, children, platform }: Props) {
           }}
           title={displayMenu.value ? "Menu" : "Buscar"}
         >
-          <div class={`${displayMenu.value ? "block" : "hidden"} overflow-y-scroll`}>
+          <div
+            class={`${
+              displayMenu.value ? "block" : "hidden"
+            } overflow-y-scroll`}
+          >
             <Menu {...menu} />
           </div>
           {searchbar && displaySearchDrawer.value && (

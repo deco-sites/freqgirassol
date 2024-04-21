@@ -59,7 +59,7 @@ function CartItem(
 
   return (
     <div
-      class="grid grid-rows-1 gap-2"
+      class="grid grid-rows-1 lg:flex gap-2 bg-[#F7F7F7] border border-gray-200 rounded-2xl p-2"
       style={{
         gridTemplateColumns: "auto 1fr",
       }}
@@ -67,15 +67,19 @@ function CartItem(
       <Image
         {...image}
         src={image.src.replace("55-55", "255-255")}
-        style={{ aspectRatio: "108 / 150" }}
-        width={108}
-        height={150}
-        class="h-full object-contain"
+        style={{ aspectRatio: "70 / 70" }}
+        width={70}
+        height={70}
+        class="h-[70px] object-contain rounded-lg lg:h-[120px] lg:w-[120px]"
       />
 
-      <div class="flex flex-col gap-2">
+      <div class="flex flex-col gap-2 pl-3 text-primary-content">
         <div class="flex justify-between items-center">
-          <span>{name}</span>
+          <span
+            class={`text-xs text-base-content font-semibold lg:text-base lg:leading-5`}
+          >
+            {name}
+          </span>
           <Button
             disabled={loading || isGift}
             loading={loading}
@@ -91,18 +95,48 @@ function CartItem(
               });
             })}
           >
-            <Icon id="Trash" size={24} />
+            <Icon id="Trash" size={24} class={`text-primary-content`} />
           </Button>
         </div>
         <div class="flex items-center gap-2">
-          <span class="line-through text-sm">
-            {formatPrice(list, currency, locale)}
+          <span class="line-through text-base text-[#aeaeae]">
+            {formatPrice(sale, currency, locale)}
           </span>
-          <span class="text-sm text-secondary">
-            {isGift ? "Grátis" : formatPrice(sale, currency, locale)}
+          <span class="text-base text-primary-content font-bold lg:text-xl">
+            {isGift ? "Grátis" : formatPrice(list, currency, locale)}
           </span>
         </div>
+        <div class={`hidden lg:flex items-center justify-between gap-2`}>
+          <span class={`font-semibold text-sm text-base-content`}>
+            QUANTIDADE:
+          </span>
+          <QuantitySelector
+            disabled={loading || isGift}
+            quantity={quantity}
+            onChange={withLoading(async (quantity) => {
+              const analyticsItem = itemToAnalyticsItem(index);
+              const diff = quantity - item.quantity;
 
+              await onUpdateQuantity(quantity, index);
+
+              if (analyticsItem) {
+                sendEvent({
+                  name: diff < 0 ? "remove_from_cart" : "add_to_cart",
+                  params: {
+                    items: [{ ...analyticsItem, quantity: Math.abs(diff) }],
+                  },
+                });
+              }
+            })}
+          />
+        </div>
+      </div>
+      <div
+        class={`grid col-start-1 col-end-3 grid-cols-[min-content_1fr] lg:hidden grid-cols-auto-1 items-center gap-4`}
+      >
+        <span class={`font-semibold text-xs text-primary-content`}>
+          QUANTIDADE:
+        </span>
         <QuantitySelector
           disabled={loading || isGift}
           quantity={quantity}

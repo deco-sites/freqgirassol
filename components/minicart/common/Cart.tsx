@@ -75,7 +75,7 @@ function Cart({
             {/* Cart Items */}
             <ul
               role="list"
-              class="mt-6 px-2 flex-grow overflow-y-auto flex flex-col gap-6 w-full"
+              class="px-2 flex-grow overflow-y-auto flex flex-col gap-6 w-full scrollbarMinicart"
             >
               {items.map((item, index) => (
                 <li key={index}>
@@ -119,7 +119,7 @@ function Cart({
               </div>
 
               <div class="p-4">
-                <a class="inline-block w-full" href={checkoutHref}>
+                <a class="inline-block w-full" href={"/cart"}>
                   <Button
                     data-deco="buy-button"
                     class="btn-primary btn-block text-lg text-white"
