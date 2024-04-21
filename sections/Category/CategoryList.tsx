@@ -105,56 +105,51 @@ function CategoryList(props: Props) {
           title={header.title}
           description={header.description || ""}
           alignment={layout.headerAlignment || "center"}
-          black
         />
       </div>
 
-      <div class="flex flex-row gap-4 px-[0] pl-[24px] lg:pl-0 overflow-x-scroll w-full lg:justify-center lg:overflow-hidden"
-      >
-          {list.map(
-            ({ label, href, imageDesktop, imageMobile, buttonText }, index) => (
-              <div
-                index={index}
-                class="m-[8px] lg:my-2 flex flex-col gap-4 relative group rounded-[20px] lg:m-0 shadow-md lg:hover:scale-[1.022] transition-all duration-300"
+      <div class="flex flex-row gap-4 px-[0] pl-[24px] lg:pl-0 overflow-x-scroll w-full lg:justify-center lg:overflow-hidden">
+        {list.map(
+          ({ label, href, imageDesktop, imageMobile, buttonText }, index) => (
+            <div class="m-[8px] lg:my-2 flex flex-col gap-4 relative group rounded-[20px] lg:m-0 shadow-md lg:hover:scale-[1.022] transition-all duration-300">
+              <a
+                href={href}
+                class="flex flex-col gap-4 w-[296px] lg:w-[145px] xl:w-[186px] 2xl:w-[236px] lg:h-auto"
               >
-                <a
-                  href={href}
-                  class="flex flex-col gap-4 w-[296px] lg:w-[145px] xl:w-[186px] 2xl:w-[236px] lg:h-auto"
-                >
-                  {imageDesktop && imageMobile && (
-                    <figure>
-                      <Image
-                        class="card w-full h-full block"
-                        src={imageMobile}
-                        alt={label || ""}
-                        width={210}
-                        height={270}
-                        loading="lazy"
-                      />
-                    </figure>
-                  )}
-                </a>
+                {imageDesktop && imageMobile && (
+                  <figure>
+                    <Image
+                      class="card w-full h-full block"
+                      src={imageMobile}
+                      alt={label || ""}
+                      width={210}
+                      height={270}
+                      loading="lazy"
+                    />
+                  </figure>
+                )}
+              </a>
 
-                <div class="absolute top-[80%] lg:group-hover:top-[33%] w-full h-fit lg:h-full flex flex-col items-center gap-[32px] transition-all duration-300 z-[2]">
-                  {label && (
-                    <p class="text-[24px] xl:text-[32px] tracking-[1.6px] text-white text-center uppercase font-bold">
-                      {label}
-                    </p>
-                  )}
-                  {buttonText && (
-                    <a
-                      href={href}
-                      class="hidden lg:block w-fit bg-white rounded-full border-none text-[#000] text-sm xl:px-7 xl:py-3 2xl:px-10 2xl:py-3.5 xl:text-base uppercase px-4 py-2.5 font-bold tracking-[1px] hover:bg-primary hover:text-white hover:border-none transition-all duration-300"
-                    >
-                      {buttonText}
-                    </a>
-                  )}
-                </div>
-
-                <div class="hidden lg:block absolute w-full h-full transition-all duration-300 rounded-[20px] lg:group-hover:bg-[#00000050] z-[1]" />
+              <div class="absolute top-[80%] lg:group-hover:top-[33%] w-full h-fit lg:h-full flex flex-col items-center gap-[32px] transition-all duration-300 z-[2]">
+                {label && (
+                  <p class="text-[24px] xl:text-[32px] tracking-[1.6px] text-white text-center uppercase font-bold">
+                    {label}
+                  </p>
+                )}
+                {buttonText && (
+                  <a
+                    href={href}
+                    class="hidden lg:block w-fit bg-white rounded-full border-none text-[#000] text-sm xl:px-7 xl:py-3 2xl:px-10 2xl:py-3.5 xl:text-base uppercase px-4 py-2.5 font-bold tracking-[1px] hover:bg-primary hover:text-white hover:border-none transition-all duration-300"
+                  >
+                    {buttonText}
+                  </a>
+                )}
               </div>
-            )
-          )}
+
+              <div class="hidden lg:block absolute w-full h-full transition-all duration-300 rounded-[20px] lg:group-hover:bg-[#00000050] z-[1]" />
+            </div>
+          ),
+        )}
       </div>
     </div>
   );

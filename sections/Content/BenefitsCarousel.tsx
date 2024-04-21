@@ -1,106 +1,80 @@
 import Icon, { AvailableIcons } from "$store/components/ui/Icon.tsx";
-import Slider from "$store/components/ui/Slider.tsx";
-import SliderJS from "$store/islands/SliderJS.tsx";
-import { useId } from "$store/sdk/useId.ts";
-import type { ImageWidget } from "apps/admin/widgets.ts";
-import Image from "apps/website/components/Image.tsx";
+import type { HTMLWidget } from "apps/admin/widgets.ts";
 
 export interface Props {
-  benifits?: {
-    icon: ImageWidget;
-    title?: string;
-    description?: string;
-  }[];
-  /**
-   * @title Autoplay interval
-   * @description time (in seconds) to start the carousel autoplay
-   */
-  interval?: number;
-  /**
-   * @title Cor de fundo
-   * @format color
-   */
-  background?: string;
-  /**
-   * @title Cor dos textos
-   * @format color
-   */
-  color?: string;
+  benefits?: Array<{
+    text: HTMLWidget;
+    icon: AvailableIcons;
+  }>;
+  layout?: {
+    variation?: "Simple" | "With border";
+  };
 }
 
-export default function BenefitsCarousel({
-  benifits = [],
-  interval = 5,
-  background = "#F4F4F4",
-  color = "#111",
-}: Props) {
-  const id = useId();
+export default function Benefits(
+  props: Props,
+) {
+  const {
+    benefits = [{
+      icon: "credCard",
+      text: "Pague em até 6x sem juros",
+    }, {
+      icon: "discountIcon",
+      text: "Use o cupom PRIMEIRA10 e ganhe 10% Off",
+    }, {
+      icon: "truckShipping",
+      text: "Frete grátis em compras acima de R$ 200,00",
+    }],
+    layout,
+  } = props;
+
+  const listOfBenefits = benefits.map((benefit) => {
+    return (
+      <div
+        class={`flex gap-4 items-center last:pr-4 lg:last:pr-0 border-right`}
+      >
+        <div class="flex pl-4 border-l border-l-white">
+          <Icon
+            id={benefit.icon}
+            class={"text-white w-10 h-10"}
+            width={40}
+            height={40}
+            strokeWidth={1}
+            fill="currentColor"
+          />
+        </div>
+        <div class="flex-auto flex flex-col gap-1 lg:gap-2 lg:h-full justify-center child">
+          <div
+            class={`text-base text-white leading-none w-max `}
+            dangerouslySetInnerHTML={{ __html: benefit.text }}
+          />
+        </div>
+      </div>
+    );
+  });
 
   return (
     <>
-      {/* Mobile Carousel */}
-      <div id={id}>
-        <Slider
-          class={`lg:hidden carousel carousel-center w-screen gap-6 text-center p-4`}
-          style={{ "background-color": background }}
-        >
-          {benifits.map((benifit, index) => (
-            <Slider.Item
-              index={index}
-              class="carousel-item flex justify-center items-center gap-[16px] w-full"
-            >
-              <img
-                src={benifit.icon}
-                alt={benifit.icon || ""}
-                className="object-cover max-w-[40px] max-h-[40px]"
-              />
-              <div class="flex flex-col items-start">
-                <strong
-                  class={`text-[18px] leading-[120%] flex justify-start text-left items-center text-[${color}]`}
-                  style={{ color: color }}
-                >
-                  {benifit?.title}
-                </strong>
-                <span
-                  class={`text-[16px] leading-[120%] uppercase flex justify-start text-left text-[${color}]`}
-                  style={{ color: color }}
-                >
-                  {benifit?.description}
-                </span>
-              </div>
-            </Slider.Item>
-          ))}
-        </Slider>
-
-        <SliderJS rootId={id} interval={interval && interval * 1e3} />
-      </div>
-
-      {/* Desktop Flex */}
-      <div class={`hidden lg:flex `} style={{ "background-color": background }}>
-        <div class="container justify-between gap-[20px] carousel carousel-center w-full text-center px-[20px] py-[32px]">
-          {benifits.map((benifit) => (
-            <div class="carousel-item flex justify-center items-center gap-[16px] w-fit">
-              <img
-                src={benifit.icon}
-                alt={benifit.icon || ""}
-                className="object-cover max-w-[40px] max-h-[40px]"
-              />
-              <div class="flex flex-col items-start">
-                <strong
-                  class={`text-[18px] leading-[120%] tracking-[0.9] flex justify-center font-bold items-center text-[${color}]`}
-                >
-                  {benifit?.title}
-                </strong>
-                <span
-                  class={`text-sm leading-[120%] tracking-[0.8] uppercase flex justify-center items-center text-[${color}]`}
-                >
-                  {benifit?.description}
-                </span>
+      {!layout?.variation || layout?.variation === "Simple"
+        ? (
+          <div class="w-full pl-4 py-3 flex flex-col gap-8 lg:gap-10 lg:px-0 bg-primary">
+            <div class="w-full flex justify-center">
+              <div class="flex gap-4 w-full h-[52px] overflow-x-scroll scrollbar-none lg:overflow-hidden lg:flex-wrap lg:justify-center lg:h-auto lg:gap-8 text-primary-content">
+                {listOfBenefits}
               </div>
             </div>
-          ))}
+          </div>
+        )
+        : ""}
+      {layout?.variation === "With border" && (
+        <div class="w-full container flex flex-col px-4 py-8 gap-8 lg:gap-10 lg:py-10 lg:px-0">
+          <div class="w-full flex justify-center">
+            <div class="grid grid-cols-2 gap-4 w-full py-6 px-4 border border-base-300 lg:gap-8 lg:grid-flow-col lg:auto-cols-fr lg:p-10">
+              {listOfBenefits}
+            </div>
+          </div>
         </div>
-      </div>
+      )}
     </>
   );
 }

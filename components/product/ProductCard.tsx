@@ -116,7 +116,7 @@ function ProductCard({
   return (
     <div
       id={id}
-      class={`card card-compact group w-full ${
+      class={`shadow-card-product card card-compact group w-full ${
         align === "center" ? "text-center" : "text-start"
       } ${l?.onMouseOver?.showCardShadow ? "lg:hover:card-bordered" : ""}
         ${
@@ -144,10 +144,9 @@ function ProductCard({
         }}
       />
       <figure
-        class="relative overflow-hidden"
+        class="relative overflow-hidden rounded-t-2xl"
         style={{ aspectRatio: `${WIDTH} / ${HEIGHT}` }}
       >
-
         {/* Product Images */}
         <a
           href={url && relative(url)}
@@ -159,7 +158,7 @@ function ProductCard({
             alt={front.alternateName}
             width={WIDTH}
             height={HEIGHT}
-            class={`bg-base-100 col-span-full row-span-full rounded w-full ${
+            class={`bg-base-100 col-span-full row-span-full w-full ${
               l?.onMouseOver?.image == "Zoom image"
                 ? "duration-100 transition-scale scale-100 lg:group-hover:scale-125"
                 : ""
@@ -176,7 +175,7 @@ function ProductCard({
               alt={back?.alternateName ?? front.alternateName}
               width={WIDTH}
               height={HEIGHT}
-              class="bg-base-100 col-span-full row-span-full transition-opacity rounded w-full opacity-0 lg:group-hover:opacity-100"
+              class="bg-base-100 col-span-full row-span-full transition-opacity w-full opacity-0 lg:group-hover:opacity-100"
               sizes="(max-width: 640px) 50vw, 20vw"
               loading="lazy"
               decoding="async"
@@ -201,7 +200,7 @@ function ProductCard({
         </figcaption>
       </figure>
       {/* Prices & Name */}
-      <div class="flex-auto flex flex-col p-2 gap-3 lg:gap-2">
+      <div class="flex-auto flex flex-col p-4 gap-3 lg:gap-2">
         {/* SKU Selector */}
         {(!l?.elementsPositions?.skuSelector ||
           l?.elementsPositions?.skuSelector === "Top") && (
@@ -244,7 +243,7 @@ function ProductCard({
                 )
                 : (
                   <div
-                    class="truncate text-sm lg:text-sm text-black"
+                    class="textTruncate text-sm lg:text-sm text-black"
                     dangerouslySetInnerHTML={{ __html: description ?? "" }}
                   />
                 )}
@@ -257,36 +256,46 @@ function ProductCard({
           : (
             <div class="flex flex-col gap-2">
               <div
-                class={`flex flex-col gap-0 ${
+                class={`flex flex-row gap-4 ${
                   l?.basics?.oldPriceSize === "Normal"
                     ? "lg:flex-row-reverse lg:gap-2"
                     : ""
-                } ${align === "center" ? "justify-center" : "justify-end"}`}
+                } ${
+                  align === "center"
+                    ? "justify-center"
+                    : "justify-start items-center"
+                }`}
               >
-                <div
-                  class={`line-through font-normal text-lg text-[#aeaeae] h-7 ${
-                    l?.basics?.oldPriceSize === "Normal" ? "lg:text-sm" : ""
-                  }`}
-                >
-                  {formatPrice(listPrice, offers?.priceCurrency)}
-                </div>
-                <div class="text-2xl font-medium text-primary-content relative">
-                  {formatPrice(price, offers?.priceCurrency)}
-                {/* Discount % */}
-                {!l?.hide?.discount && (
-                  <>
-                  {listPrice && price && listPrice > price &&(
-                    <div class="absolute text-sm bg-primary top-[7px] right-0 lg:right-3 px-2 py-[1px]  rounded-full">
-                      <span class="text-white font-bold">
-                        {listPrice && price
-                          ? `-${Math.round(((listPrice - price) / listPrice) * 100)}% `
-                          : ""}
-                      </span>
+                {listPrice &&
+                  (
+                    <div
+                      class={`line-through font-normal text-sm lg:tex-base 2xl:text-lg text-[#aeaeae] ${
+                        l?.basics?.oldPriceSize === "Normal" ? "lg:text-sm" : ""
+                      }`}
+                    >
+                      {formatPrice(listPrice, offers?.priceCurrency)}
                     </div>
                   )}
-                    
-                  </>
-                )}
+                <div class="text-base font-bold lg:text-xl 2xl:text-2xl text-primary-content relative">
+                  {formatPrice(price, offers?.priceCurrency)}
+                  {/* Discount % */}
+                  {!l?.hide?.discount && (
+                    <>
+                      {listPrice && price && listPrice > price && (
+                        <div class="absolute text-sm bg-primary top-[7px] right-0 lg:right-3 px-2 py-[1px]  rounded-full">
+                          <span class="text-white font-bold">
+                            {listPrice && price
+                              ? `-${
+                                Math.round(
+                                  ((listPrice - price) / listPrice) * 100,
+                                )
+                              }% `
+                              : ""}
+                          </span>
+                        </div>
+                      )}
+                    </>
+                  )}
                 </div>
               </div>
             </div>
@@ -331,8 +340,16 @@ function ProductCard({
               }`}
             >
               {cta}
-              <a href="#" class={`gap-2 border border-secondary w-full py-1 flex items-center justify-center rounded-lg text-secondary`}>
-                <Icon size={16} id="WhatsApp" strokeWidth={1} class={`text-secondary`}/>
+              <a
+                href="#"
+                class={`gap-2 border border-secondary w-full py-1 flex items-center justify-center rounded-lg text-secondary`}
+              >
+                <Icon
+                  size={16}
+                  id="WhatsApp"
+                  strokeWidth={1}
+                  class={`text-secondary`}
+                />
                 WhatsApp
               </a>
             </div>

@@ -35,16 +35,21 @@ function Avatar({ content, variant = "default" }: Props) {
   return (
     <>
       {content != "Default Title" &&
-        <div class="text-sm font-light h-6">
-          <div
-            class={`${colors[content] ?? colors[variant]}`}
+        (
+          <div class="text-sm font-light h-6">
+            <div
+              class={`${colors[content] ?? colors[variant]}`}
             >
-            <span class={`${variants[variant]} hover:bg-primary hover:text-white py-2.5 px-4 rounded-lg font-medium`}>
-              {colors[content] ? "" : content}
-            </span>
+              <span
+                class={`${
+                  variants[variant]
+                } hover:bg-primary hover:text-white py-2.5 px-4 rounded-lg font-medium`}
+              >
+                {colors[content] ? "" : content}
+              </span>
+            </div>
           </div>
-        </div>
-      }
+        )}
     </>
   );
 }

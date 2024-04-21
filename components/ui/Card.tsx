@@ -58,7 +58,7 @@ function Card(
             preload={isLcp}
           />
           <img
-            class={`w-full rounded-md`}
+            class={`w-[200px] rounded-md`}
             loading={isLcp ? "eager" : "lazy"}
             src={image}
             width={282}

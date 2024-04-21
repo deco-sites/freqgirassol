@@ -46,15 +46,18 @@ function Result({
 }: Omit<Props, "page"> & { page: ProductListingPage }) {
   const { products, filters, breadcrumb, pageInfo, sortOptions } = page;
   const perPage = pageInfo.recordPerPage || products.length;
-
+  const records = pageInfo.records ?? products.length;
+  const recordPerPage = pageInfo.recordPerPage ?? 1;
+  const value = Math.ceil(records / recordPerPage);
   const id = useId();
 
+  console.log(pageInfo);
   const zeroIndexedOffsetPage = pageInfo.currentPage - startingPage;
   const offset = zeroIndexedOffsetPage * perPage;
 
   return (
     <>
-      <div class="container px-4 sm:py-10">
+      <div class="w-11/12 mx-auto sm:py-10 lg:max-w-[1300px] lg:px-0">
         <SearchControls
           sortOptions={sortOptions}
           filters={filters}
@@ -62,9 +65,9 @@ function Result({
           displayFilter={layout?.variant === "drawer"}
         />
 
-        <div class="flex flex-row">
+        <div class="flex flex-row gap-8">
           {layout?.variant === "aside" && filters.length > 0 && (
-            <aside class="hidden sm:block w-min min-w-[250px]">
+            <aside class="hidden lg:block w-min min-w-[304px]">
               <Filters filters={filters} />
             </aside>
           )}
@@ -77,26 +80,39 @@ function Result({
           </div>
         </div>
 
-        <div class="flex justify-center my-4">
-          <div class="join">
+        <div class="flex justify-center py-10 mx-auto w-11/12 items-center">
+          <div class="flex gap-5 items-center justify-center">
             <a
               aria-label="previous page link"
               rel="prev"
               href={pageInfo.previousPage ?? "#"}
-              class="btn btn-ghost join-item"
+              class="flex items-center justify-center p-3.5 rounded-full bg-white border border-black border-opacity-10"
             >
-              <Icon id="ChevronLeft" size={24} strokeWidth={2} />
+              <Icon
+                id="ChevronLeft"
+                size={20}
+                strokeWidth={1}
+                class="text-primary-content opacity-60"
+              />
             </a>
-            <span class="btn btn-ghost join-item">
-              Page {zeroIndexedOffsetPage + 1}
+            <span class="flex items-center text-primary-content justify-center px-4 gap-2">
+              Página{" "}
+              <strong class="text-primary">{pageInfo.currentPage}</strong> de
+              {" "}
+              <strong class="text-primary">{value}</strong>
             </span>
             <a
               aria-label="next page link"
               rel="next"
               href={pageInfo.nextPage ?? "#"}
-              class="btn btn-ghost join-item"
+              class="flex items-center justify-center p-3.5 rounded-full bg-white border border-black border-opacity-10"
             >
-              <Icon id="ChevronRight" size={24} strokeWidth={2} />
+              <Icon
+                id="ChevronRight"
+                size={20}
+                strokeWidth={2}
+                class="text-primary-content opacity-60"
+              />
             </a>
           </div>
         </div>
