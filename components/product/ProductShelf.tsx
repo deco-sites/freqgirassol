@@ -55,7 +55,7 @@ function ProductShelf({
   };
 
   const slideMobile = {
-    1: "w-full",
+    1: "min-w-[55%] md:min-w-[40%]",
     2: "min-w-[50%] md:min-w-[32.8%]",
     3: "w-1/3",
     4: "w-1/4",
@@ -67,10 +67,11 @@ function ProductShelf({
         bgGray ? "bg-base-300" : "bg-white"
       }`}
     >
-      <div class="w-11/12 mx-auto max-w-[1300px] flex flex-col gap-6">
+      <div class="w-full pl-4 lg:pl-0 lg:w-11/12 mx-auto max-w-[1300px] flex flex-col gap-6">
         <Header
           title={title || ""}
           description={description || ""}
+          markupTitle={markupTitle}
           fontSize={layout?.headerfontSize || "Large"}
           alignment={layout?.headerAlignment || "center"}
         />
@@ -79,11 +80,11 @@ function ProductShelf({
           id={id}
           class={`flex flex-col relative items-center w-full`}
         >
-          <Slider class="carousel carousel-center sm:carousel-end py-3 lg:w-full">
+          <Slider class="carousel carousel-center sm:carousel-end py-3 w-full">
             {products?.map((product, index) => (
               <Slider.Item
                 index={index}
-                class={`mx-[3px] lg:mx-3 xl:mx-4 rounded-2xl ${
+                class={`mx-2 lg:mx-3 xl:mx-4 rounded-2xl ${
                   slideMobile[layout?.numberOfSliders?.mobile ?? 1]
                 } ${slideDesktop[layout?.numberOfSliders?.desktop ?? 3]}`}
               >
@@ -99,7 +100,7 @@ function ProductShelf({
           </Slider>
           {layout?.showArrows && (
             <>
-              <Slider.PrevButton class="absolute -left-8 2xl:-left-12 top-[45%] bg-primary w-12 h-12 flex justify-center items-center border border-black border-opacity-10 rounded-[500px]">
+              <Slider.PrevButton class="hidden lg:flex absolute -left-8 2xl:-left-12 top-[45%] bg-primary w-12 h-12 justify-center items-center border border-black border-opacity-10 rounded-[500px]">
                 <Icon
                   size={24}
                   id="ChevronLeft"
@@ -122,7 +123,7 @@ function ProductShelf({
           </ul>
           {layout?.showArrows && (
             <>
-              <Slider.NextButton class="absolute -right-8 2xl:-right-12 top-[45%] bg-primary w-12 h-12 flex justify-center items-center border border-black border-opacity-10 rounded-[500px]">
+              <Slider.NextButton class="absolute -right-8 2xl:-right-12 top-[45%] bg-primary w-12 h-12 hidden lg:flex justify-center items-center border border-black border-opacity-10 rounded-[500px]">
                 <Icon
                   size={24}
                   id="ChevronRight"

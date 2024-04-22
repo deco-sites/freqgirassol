@@ -87,10 +87,10 @@ function Navbar({ items, searchbar, logoPreto, platform }: Props) {
 
       {/* Desktop Version */}
       <div
-        class={`hidden shadow-md lg:flex h-[55px] bg-white py-5`}
+        class={`hidden shadow-md relative lg:flex h-[55px] bg-white py-5`}
       >
-        <div class="container relative inis flex justify-center flex-row items-center w-full z-[999]">
-          <div class="z-50 absolute left-0">
+        <div class="container flex justify-center flex-row items-center w-full z-[999]">
+          <div class="z-50 absolute left-[2vw] xl:left-[8vw] 2xl:left-[10vw]">
             {logoPreto && (
               <a
                 href="/"
@@ -109,7 +109,7 @@ function Navbar({ items, searchbar, logoPreto, platform }: Props) {
           <ul class="containerNavItems hidden lg:flex justify-center z-30">
             {items.map((item, index) => <NavItem item={item} index={index} />)}
           </ul>
-          <div class="flex-none absolute right-0 w-44 flex items-center justify-end gap-2">
+          <div class="flex-none absolute right-[2vw] xl:right-[8vw] 2xl:right-[10vw] w-44 flex items-center justify-end gap-2">
             <SearchButton />
             <Searchbar searchbar={searchbar} />
             <a

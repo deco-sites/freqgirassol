@@ -8,6 +8,7 @@ export interface Props {
   /** @description: sku name */
   eventParams: AddToCartParams;
   onAddItem: () => Promise<void>;
+  className?: string;
 }
 
 const useAddToCart = ({ eventParams, onAddItem }: Props) => {
@@ -41,7 +42,10 @@ export default function AddToCartButton(props: Props) {
   const btnProps = useAddToCart(props);
 
   return (
-    <Button {...btnProps} class="btn-primary">
+    <Button
+      {...btnProps}
+      class={`btn-primary rounded-lg text-white text-base ${props.className}`}
+    >
       Adicionar à Sacola
     </Button>
   );

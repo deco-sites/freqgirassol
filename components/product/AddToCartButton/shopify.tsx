@@ -3,9 +3,10 @@ import Button, { Props as BtnProps } from "./common.tsx";
 
 export type Props = Omit<BtnProps, "onAddItem"> & {
   productID: string;
+  className?: string;
 };
 
-function AddToCartButton({ productID, eventParams }: Props) {
+function AddToCartButton({ productID, eventParams, className }: Props) {
   const { addItems } = useCart();
   const onAddItem = () =>
     addItems({
@@ -14,7 +15,13 @@ function AddToCartButton({ productID, eventParams }: Props) {
       },
     });
 
-  return <Button onAddItem={onAddItem} eventParams={eventParams} />;
+  return (
+    <Button
+      onAddItem={onAddItem}
+      eventParams={eventParams}
+      className={className}
+    />
+  );
 }
 
 export default AddToCartButton;

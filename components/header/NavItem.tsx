@@ -66,8 +66,7 @@ function NavItem({ item, index }: { item: INavItem; index: number }) {
       {children && children.length > 0 &&
         (
           <div
-            class={`NavItemChildren border-t border-[#00000017] shadow-md fixed opacity-0 group-hover:pointer-events-auto min-h-[366px] transition-all duration-300 ease-linear pointer-events-none py-8.5 bg-white z-50 w-screen`}
-            style={{ top: "0px", left: "0px", marginTop: "88px" }}
+            class={`NavItemChildren border-t top-[54px] left-0 border-[#00000017] shadow-md absolute opacity-0 group-hover:pointer-events-auto min-h-[366px] transition-all duration-300 ease-linear pointer-events-none py-8.5 bg-white z-50 w-screen`}
           >
             <div class="container flex justify-evenly items-start mx-auto py-8">
               <ul class="flex gap-12 flex-row items-start justify-center">
@@ -76,7 +75,7 @@ function NavItem({ item, index }: { item: INavItem; index: number }) {
                     {node.label &&
                       (
                         <a
-                          class={`text-xl text-black pb-2  ${
+                          class={`text-xl text-base-content pb-2 ${
                             node.destaque ? "text-primary-content" : ""
                           } ${node.fontBold ? "font-bold" : ""}`}
                           href={node.href}
@@ -91,7 +90,7 @@ function NavItem({ item, index }: { item: INavItem; index: number }) {
                           {node.children.map((item) => {
                             return (
                               <a
-                                class={`text-base text-black py-1 ${
+                                class={`text-base hover:text-primary duration-200 text-base-content py-1 ${
                                   item.destaque ? "text-primary" : ""
                                 }`}
                                 href={item.href}
