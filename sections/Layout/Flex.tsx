@@ -47,7 +47,7 @@ function SectionFlex(
   return (
     <div
       class={clx(
-        "w-full flex",
+        "w-full flex mx-auto max-w-[100vw] lg:max-w-[1300px]",
         gap?.mobile && flex.gap.mobile[gap.mobile],
         gap?.desktop && flex.gap.desktop[gap.desktop],
         direction?.mobile &&
@@ -67,7 +67,9 @@ function SectionFlex(
       {children}
       {sectionChildrens &&
         sectionChildrens.map((section) => (
-          <section.Component {...section.props} />
+          <div class={`w-full`}>
+            <section.Component {...section.props} />
+          </div>
         ))}
     </div>
   );

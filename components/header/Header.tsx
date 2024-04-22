@@ -6,7 +6,9 @@ import type { SiteNavigationElement } from "apps/commerce/types.ts";
 import Alert from "$store/components/header/Alert.tsx";
 import Navbar from "$store/components/header/Navbar.tsx";
 import type { Props as ICard } from "$store/components/ui/Card.tsx";
+import ScrollableContainer from "$store/islands/ScrollableContainer.tsx";
 import { headerHeight } from "./constants.ts";
+
 interface itemsNav {
   label: string;
   href: string;
@@ -68,7 +70,10 @@ function Header({ alerts, interval, searchbar, navItems, logoPreto }: Props) {
     <header style={{ height: headerHeight }}>
       <Drawers menu={{ items }} searchbar={searchbar} platform={platform}>
         <div className="fixed w-full z-50">
-          <Alert alerts={alerts} interval={interval} />
+          <ScrollableContainer type="Alert">
+            <Alert alerts={alerts} interval={interval} />
+          </ScrollableContainer>
+
           <Navbar
             items={items}
             searchbar={searchbar && { ...searchbar, platform }}

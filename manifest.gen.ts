@@ -36,30 +36,37 @@ import * as $$$$$$26 from "./sections/Images/BannerGrid.tsx";
 import * as $$$$$$27 from "./sections/Images/Carousel.tsx";
 import * as $$$$$$28 from "./sections/Images/ImageGallery.tsx";
 import * as $$$$$$29 from "./sections/Images/ShoppableBanner.tsx";
-import * as $$$$$$30 from "./sections/Layout/Container.tsx";
-import * as $$$$$$31 from "./sections/Layout/Flex.tsx";
-import * as $$$$$$32 from "./sections/Layout/Grid.tsx";
-import * as $$$$$$33 from "./sections/Layout/GridItem.tsx";
-import * as $$$$$$34 from "./sections/Links/LinkTree.tsx";
-import * as $$$$$$35 from "./sections/Links/Shortcuts.tsx";
-import * as $$$$$$36 from "./sections/Miscellaneous/CampaignTimer.tsx";
-import * as $$$$$$37 from "./sections/Miscellaneous/CookieConsent.tsx";
-import * as $$$$$$38 from "./sections/Miscellaneous/Slide.tsx";
-import * as $$$$$$39 from "./sections/Newsletter/Newsletter.tsx";
-import * as $$$$$$40 from "./sections/Plural/PluralBanner.tsx";
-import * as $$$$$$41 from "./sections/Product/ImageGalleryFrontBack.tsx";
-import * as $$$$$$42 from "./sections/Product/ImageGallerySlider.tsx";
-import * as $$$$$$43 from "./sections/Product/NotFound.tsx";
-import * as $$$$$$44 from "./sections/Product/NotFoundChallenge.tsx";
-import * as $$$$$$45 from "./sections/Product/ProductInfo.tsx";
-import * as $$$$$$46 from "./sections/Product/ProductShelf.tsx";
-import * as $$$$$$47 from "./sections/Product/ProductShelfTabbed.tsx";
-import * as $$$$$$48 from "./sections/Product/SearchResult.tsx";
-import * as $$$$$$49 from "./sections/Product/ShelfWithImage.tsx";
-import * as $$$$$$50 from "./sections/Product/Wishlist.tsx";
-import * as $$$$$$51 from "./sections/Social/InstagramPosts.tsx";
-import * as $$$$$$52 from "./sections/Social/WhatsApp.tsx";
-import * as $$$$$$53 from "./sections/Theme/Theme.tsx";
+import * as $$$$$$30 from "./sections/Institucionals/BannerGridText.tsx";
+import * as $$$$$$31 from "./sections/Institucionals/CardsStore.tsx";
+import * as $$$$$$32 from "./sections/Institucionals/ContainerInstitucional.tsx";
+import * as $$$$$$33 from "./sections/Institucionals/LayoutInstitucional.tsx";
+import * as $$$$$$34 from "./sections/Institucionals/Menu.tsx";
+import * as $$$$$$35 from "./sections/Institucionals/RichTextInstitucional.tsx";
+import * as $$$$$$36 from "./sections/Layout/Container.tsx";
+import * as $$$$$$37 from "./sections/Layout/Flex.tsx";
+import * as $$$$$$38 from "./sections/Layout/Grid.tsx";
+import * as $$$$$$39 from "./sections/Layout/GridItem.tsx";
+import * as $$$$$$40 from "./sections/Links/LinkTree.tsx";
+import * as $$$$$$41 from "./sections/Links/Shortcuts.tsx";
+import * as $$$$$$42 from "./sections/Miscellaneous/CampaignTimer.tsx";
+import * as $$$$$$43 from "./sections/Miscellaneous/CookieConsent.tsx";
+import * as $$$$$$44 from "./sections/Miscellaneous/Slide.tsx";
+import * as $$$$$$45 from "./sections/Newsletter/Newsletter.tsx";
+import * as $$$$$$46 from "./sections/Plural/PluralBanner.tsx";
+import * as $$$$$$47 from "./sections/Product/ImageGalleryFrontBack.tsx";
+import * as $$$$$$48 from "./sections/Product/ImageGallerySlider.tsx";
+import * as $$$$$$49 from "./sections/Product/NotFound.tsx";
+import * as $$$$$$50 from "./sections/Product/NotFoundChallenge.tsx";
+import * as $$$$$$51 from "./sections/Product/ProductDetails.tsx";
+import * as $$$$$$52 from "./sections/Product/ProductInfo.tsx";
+import * as $$$$$$53 from "./sections/Product/ProductShelf.tsx";
+import * as $$$$$$54 from "./sections/Product/ProductShelfTabbed.tsx";
+import * as $$$$$$55 from "./sections/Product/SearchResult.tsx";
+import * as $$$$$$56 from "./sections/Product/ShelfWithImage.tsx";
+import * as $$$$$$57 from "./sections/Product/Wishlist.tsx";
+import * as $$$$$$58 from "./sections/Social/InstagramPosts.tsx";
+import * as $$$$$$59 from "./sections/Social/WhatsApp.tsx";
+import * as $$$$$$60 from "./sections/Theme/Theme.tsx";
 
 const manifest = {
   "loaders": {
@@ -99,33 +106,44 @@ const manifest = {
     "deco-sites/freqgirassol/sections/Images/Carousel.tsx": $$$$$$27,
     "deco-sites/freqgirassol/sections/Images/ImageGallery.tsx": $$$$$$28,
     "deco-sites/freqgirassol/sections/Images/ShoppableBanner.tsx": $$$$$$29,
-    "deco-sites/freqgirassol/sections/Layout/Container.tsx": $$$$$$30,
-    "deco-sites/freqgirassol/sections/Layout/Flex.tsx": $$$$$$31,
-    "deco-sites/freqgirassol/sections/Layout/Grid.tsx": $$$$$$32,
-    "deco-sites/freqgirassol/sections/Layout/GridItem.tsx": $$$$$$33,
-    "deco-sites/freqgirassol/sections/Links/LinkTree.tsx": $$$$$$34,
-    "deco-sites/freqgirassol/sections/Links/Shortcuts.tsx": $$$$$$35,
+    "deco-sites/freqgirassol/sections/Institucionals/BannerGridText.tsx":
+      $$$$$$30,
+    "deco-sites/freqgirassol/sections/Institucionals/CardsStore.tsx": $$$$$$31,
+    "deco-sites/freqgirassol/sections/Institucionals/ContainerInstitucional.tsx":
+      $$$$$$32,
+    "deco-sites/freqgirassol/sections/Institucionals/LayoutInstitucional.tsx":
+      $$$$$$33,
+    "deco-sites/freqgirassol/sections/Institucionals/Menu.tsx": $$$$$$34,
+    "deco-sites/freqgirassol/sections/Institucionals/RichTextInstitucional.tsx":
+      $$$$$$35,
+    "deco-sites/freqgirassol/sections/Layout/Container.tsx": $$$$$$36,
+    "deco-sites/freqgirassol/sections/Layout/Flex.tsx": $$$$$$37,
+    "deco-sites/freqgirassol/sections/Layout/Grid.tsx": $$$$$$38,
+    "deco-sites/freqgirassol/sections/Layout/GridItem.tsx": $$$$$$39,
+    "deco-sites/freqgirassol/sections/Links/LinkTree.tsx": $$$$$$40,
+    "deco-sites/freqgirassol/sections/Links/Shortcuts.tsx": $$$$$$41,
     "deco-sites/freqgirassol/sections/Miscellaneous/CampaignTimer.tsx":
-      $$$$$$36,
+      $$$$$$42,
     "deco-sites/freqgirassol/sections/Miscellaneous/CookieConsent.tsx":
-      $$$$$$37,
-    "deco-sites/freqgirassol/sections/Miscellaneous/Slide.tsx": $$$$$$38,
-    "deco-sites/freqgirassol/sections/Newsletter/Newsletter.tsx": $$$$$$39,
-    "deco-sites/freqgirassol/sections/Plural/PluralBanner.tsx": $$$$$$40,
+      $$$$$$43,
+    "deco-sites/freqgirassol/sections/Miscellaneous/Slide.tsx": $$$$$$44,
+    "deco-sites/freqgirassol/sections/Newsletter/Newsletter.tsx": $$$$$$45,
+    "deco-sites/freqgirassol/sections/Plural/PluralBanner.tsx": $$$$$$46,
     "deco-sites/freqgirassol/sections/Product/ImageGalleryFrontBack.tsx":
-      $$$$$$41,
-    "deco-sites/freqgirassol/sections/Product/ImageGallerySlider.tsx": $$$$$$42,
-    "deco-sites/freqgirassol/sections/Product/NotFound.tsx": $$$$$$43,
-    "deco-sites/freqgirassol/sections/Product/NotFoundChallenge.tsx": $$$$$$44,
-    "deco-sites/freqgirassol/sections/Product/ProductInfo.tsx": $$$$$$45,
-    "deco-sites/freqgirassol/sections/Product/ProductShelf.tsx": $$$$$$46,
-    "deco-sites/freqgirassol/sections/Product/ProductShelfTabbed.tsx": $$$$$$47,
-    "deco-sites/freqgirassol/sections/Product/SearchResult.tsx": $$$$$$48,
-    "deco-sites/freqgirassol/sections/Product/ShelfWithImage.tsx": $$$$$$49,
-    "deco-sites/freqgirassol/sections/Product/Wishlist.tsx": $$$$$$50,
-    "deco-sites/freqgirassol/sections/Social/InstagramPosts.tsx": $$$$$$51,
-    "deco-sites/freqgirassol/sections/Social/WhatsApp.tsx": $$$$$$52,
-    "deco-sites/freqgirassol/sections/Theme/Theme.tsx": $$$$$$53,
+      $$$$$$47,
+    "deco-sites/freqgirassol/sections/Product/ImageGallerySlider.tsx": $$$$$$48,
+    "deco-sites/freqgirassol/sections/Product/NotFound.tsx": $$$$$$49,
+    "deco-sites/freqgirassol/sections/Product/NotFoundChallenge.tsx": $$$$$$50,
+    "deco-sites/freqgirassol/sections/Product/ProductDetails.tsx": $$$$$$51,
+    "deco-sites/freqgirassol/sections/Product/ProductInfo.tsx": $$$$$$52,
+    "deco-sites/freqgirassol/sections/Product/ProductShelf.tsx": $$$$$$53,
+    "deco-sites/freqgirassol/sections/Product/ProductShelfTabbed.tsx": $$$$$$54,
+    "deco-sites/freqgirassol/sections/Product/SearchResult.tsx": $$$$$$55,
+    "deco-sites/freqgirassol/sections/Product/ShelfWithImage.tsx": $$$$$$56,
+    "deco-sites/freqgirassol/sections/Product/Wishlist.tsx": $$$$$$57,
+    "deco-sites/freqgirassol/sections/Social/InstagramPosts.tsx": $$$$$$58,
+    "deco-sites/freqgirassol/sections/Social/WhatsApp.tsx": $$$$$$59,
+    "deco-sites/freqgirassol/sections/Theme/Theme.tsx": $$$$$$60,
   },
   "apps": {
     "deco-sites/freqgirassol/apps/decohub.ts": $$$$$$$$$$$0,

@@ -111,7 +111,7 @@ function CategoryList(props: Props) {
       <div class="flex flex-row gap-4 px-[0] pl-[24px] lg:pl-0 overflow-x-scroll w-full lg:justify-center lg:overflow-hidden">
         {list.map(
           ({ label, href, imageDesktop, imageMobile, buttonText }, index) => (
-            <div class="m-[8px] lg:my-2 flex flex-col gap-4 relative group rounded-[20px] lg:m-0 shadow-md lg:hover:scale-[1.022] transition-all duration-300">
+            <div class="m-2 h-full lg:my-2 flex flex-col gap-4 relative group rounded-[20px] lg:m-0 shadow-md lg:hover:scale-[1.022] transition-all duration-300">
               <a
                 href={href}
                 class="flex flex-col gap-4 w-[296px] lg:w-[145px] xl:w-[186px] 2xl:w-[236px] lg:h-auto"
@@ -132,7 +132,7 @@ function CategoryList(props: Props) {
 
               <div class="absolute top-[80%] lg:group-hover:top-[33%] w-full h-fit lg:h-full flex flex-col items-center gap-[32px] transition-all duration-300 z-[2]">
                 {label && (
-                  <p class="text-[24px] xl:text-[32px] tracking-[1.6px] text-white text-center uppercase font-bold">
+                  <p class="text-2xl tracking-[1.6px] drop-shadow-lg text-white text-center uppercase font-bold">
                     {label}
                   </p>
                 )}

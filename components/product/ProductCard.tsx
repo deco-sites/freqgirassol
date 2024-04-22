@@ -199,6 +199,24 @@ function ProductCard({
           {l?.onMouseOver?.showCta && cta}
         </figcaption>
       </figure>
+      {/* Discount % */}
+      {!l?.hide?.discount && (
+        <>
+          {listPrice && price && listPrice > price && (
+            <div class="absolute text-sm bg-secondary top-[7px] right-2 lg:right-3 px-2 py-[1px]  rounded-full">
+              <span class="text-white font-bold">
+                {listPrice && price
+                  ? `-${
+                    Math.round(
+                      ((listPrice - price) / listPrice) * 100,
+                    )
+                  }% `
+                  : ""}
+              </span>
+            </div>
+          )}
+        </>
+      )}
       {/* Prices & Name */}
       <div class="flex-auto flex flex-col p-4 gap-3 lg:gap-2">
         {/* SKU Selector */}
@@ -243,7 +261,7 @@ function ProductCard({
                 )
                 : (
                   <div
-                    class="textTruncate text-sm lg:text-sm text-black"
+                    class="textTruncate text-sm lg:text-sm text-black h-10"
                     dangerouslySetInnerHTML={{ __html: description ?? "" }}
                   />
                 )}
@@ -278,24 +296,6 @@ function ProductCard({
                   )}
                 <div class="text-base font-bold lg:text-xl 2xl:text-2xl text-primary-content relative">
                   {formatPrice(price, offers?.priceCurrency)}
-                  {/* Discount % */}
-                  {!l?.hide?.discount && (
-                    <>
-                      {listPrice && price && listPrice > price && (
-                        <div class="absolute text-sm bg-primary top-[7px] right-0 lg:right-3 px-2 py-[1px]  rounded-full">
-                          <span class="text-white font-bold">
-                            {listPrice && price
-                              ? `-${
-                                Math.round(
-                                  ((listPrice - price) / listPrice) * 100,
-                                )
-                              }% `
-                              : ""}
-                          </span>
-                        </div>
-                      )}
-                    </>
-                  )}
                 </div>
               </div>
             </div>

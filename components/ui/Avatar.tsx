@@ -28,7 +28,7 @@ interface Props {
 const variants = {
   active: "bg-primary text-white",
   disabled: "line-through text-neutral-content",
-  default: "bg-white text-primary-content",
+  default: "bg-white text-primary-content border border-primary-content",
 };
 
 function Avatar({ content, variant = "default" }: Props) {

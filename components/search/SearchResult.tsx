@@ -8,6 +8,7 @@ import { useOffer } from "$store/sdk/useOffer.ts";
 import type { ProductListingPage } from "apps/commerce/types.ts";
 import { mapProductToAnalyticsItem } from "apps/commerce/utils/productToAnalyticsItem.ts";
 import ProductGallery, { Columns } from "../product/ProductGallery.tsx";
+import { Section } from "deco/blocks/section.ts";
 
 export interface Layout {
   /**
@@ -18,22 +19,24 @@ export interface Layout {
    * @description Number of products per line on grid
    */
   columns?: Columns;
+  itemsPerPage?: number;
 }
 
 export interface Props {
   /** @title Integration */
-  page: ProductListingPage | null;
+  page?: ProductListingPage | null;
   layout?: Layout;
   cardLayout?: CardLayout;
-
+  notFoundPage?: Section;
   /** @description 0 for ?page=0 as your first page */
   startingPage?: 0 | 1;
 }
 
-function NotFound() {
+function NotFound({ notFoundPage }: Props) {
   return (
     <div class="w-full flex justify-center items-center py-10">
-      <span>Not Found!</span>
+      {notFoundPage &&
+        <notFoundPage.Component {...notFoundPage.props} />}
     </div>
   );
 }
@@ -42,16 +45,32 @@ function Result({
   page,
   layout,
   cardLayout,
-  startingPage = 0,
+  startingPage = 1,
 }: Omit<Props, "page"> & { page: ProductListingPage }) {
   const { products, filters, breadcrumb, pageInfo, sortOptions } = page;
   const perPage = pageInfo.recordPerPage || products.length;
-  const records = pageInfo.records ?? products.length;
-  const recordPerPage = pageInfo.recordPerPage ?? 1;
-  const value = Math.ceil(records / recordPerPage);
   const id = useId();
 
-  console.log(pageInfo);
+  let totalQuantity = 0;
+
+  // Iterar sobre o array filters
+  filters.forEach((filter) => {
+    // Verificar se o filtro é do tipo FilterToggle
+    if (filter["@type"] === "FilterToggle") {
+      // Iterar sobre os valores dentro do array values
+      filter.values.forEach((value) => {
+        if (
+          filter.label == "Availability" || filter.label == "Fora de estoque"
+        ) {
+          // Adicionar o valor de quantity ao totalQuantity
+          totalQuantity += value.quantity;
+        }
+      });
+    }
+  });
+
+  const value = Math.ceil(totalQuantity / (layout?.itemsPerPage || 4));
+
   const zeroIndexedOffsetPage = pageInfo.currentPage - startingPage;
   const offset = zeroIndexedOffsetPage * perPage;
 
@@ -97,9 +116,9 @@ function Result({
             </a>
             <span class="flex items-center text-primary-content justify-center px-4 gap-2">
               Página{" "}
-              <strong class="text-primary">{pageInfo.currentPage}</strong> de
+              <strong class="text-primary">{pageInfo.currentPage + 1}</strong>
               {" "}
-              <strong class="text-primary">{value}</strong>
+              de <strong class="text-primary">{value}</strong>
             </span>
             <a
               aria-label="next page link"
@@ -140,9 +159,9 @@ function Result({
   );
 }
 
-function SearchResult({ page, ...props }: Props) {
-  if (!page) {
-    return <NotFound />;
+function SearchResult({ page, notFoundPage, ...props }: Props) {
+  if (!page || page.products.length == 0) {
+    return <NotFound notFoundPage={notFoundPage} />;
   }
 
   return <Result {...props} page={page} />;
