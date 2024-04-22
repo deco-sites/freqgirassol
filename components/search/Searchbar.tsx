@@ -27,7 +27,7 @@ export interface Props {
   /**
    * @title Placeholder
    * @description Search bar default placeholder message
-   * @default O que você esta procurando? 
+   * @default O que você esta procurando?
    */
   placeholder?: string;
   /**
